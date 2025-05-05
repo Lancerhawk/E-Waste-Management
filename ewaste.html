@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><U>ECO-JEEVAN</U></title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="auth.js" defer></script>
+</head>
+<body>
+    <div class="background-slideshow" id="backgroundSlideshow"></div>
+    <nav class="navbar">
+        <div class="logo">
+            <h1><U>ECO-JEEVAN</U></h1>
+        </div>
+        <div class="nav-links">
+            <a href="index.html"><u>Home</u></a>
+            <a href="browse.html"><u>About</u></a>
+            <a href="donation.html"><u>Donation</u> </a>
+            <!--<a href="selling.html">Selling  </a>-->
+            <a href="ewaste.html"><u>E-waste</u> </a>
+            <a href="Refurbished.html"><u>Refurbished</u></a>
+            <a href="profile.html" id="profileLink"><u>Profile</u></a>
+            <!--<a href="login.html" id="logoutLink">Logout</a>-->
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <h2 class="section-title">List Your Item here (only e-waste)*</h2>
+        <form class="sell-form">
+            <div class="form-group">
+                <label for="title">Item Title</label>
+                <input type="text" id="title" required placeholder="Enter item title">
+            </div>
+            
+            <div class="form-group">
+                <label for="category">Category</label>
+                <select id="category" required>
+                    <option value="">Select a category</option>
+                    <option value="laptop">laptop</option>
+                    <option value=">keyboard">keyboard</option>
+                    <option value="mouse">mouse</option>
+                    <option value="speakers">speakers</option>
+                    <option value="Television">Television</option>
+                    <option value="mobile phone">mobile phone</option>
+                    <option value="other">batteries</option>
+                    <option value="other">Fridge Components</option>
+                    <option value="other">Motors</option>
+                    <option value="other">Cable wires</option>
+                    <option value="other">LED bulb</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea id="description" required placeholder="Describe your item..."></textarea>
+            </div>
+
+           <!-- <div class="form-group">
+                <label for="startingPrice">Starting Price ($)</label>
+                <input type="number" id="startingPrice" required min="1" step="0.01">
+            </div>
+            --->
+
+            <div class="form-group">
+                <label for="duration">Pickup date(days are counted after you submit the form max 7 working days)</label>
+                <select id="duration" required>
+                    <option value="1">1 day</option>
+                    <option value="3">3 days</option>
+                    <option value="7">7 days</option>
+                    <option value="14">14 days</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="images">Upload Images</label>
+                <input type="file" id="images" accept="image/*" multiple>
+            </div>
+
+            <button type="submit" class="bid-btn">List Item</button>
+        </form>
+    </main>
+
+    <script>
+        // Background slideshow functionality
+        const backgrounds = [
+            'url("https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80") center/cover',
+            'url("https://images.unsplash.com/photo-1473973266408-ed4e27abdd47?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80") center/cover',
+            'url("https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80") center/cover'
+        ];
+
+        function createBackgroundSlides() {
+            const container = document.getElementById('backgroundSlideshow');
+            backgrounds.forEach((bg, index) => {
+                const slide = document.createElement('div');
+                slide.className = 'background-slide';
+                slide.style.background = bg;
+                slide.style.opacity = index === 0 ? '1' : '0';
+                container.appendChild(slide);
+            });
+        }
+
+        function rotateBackgrounds() {
+            const slides = document.querySelectorAll('.background-slide');
+            let currentSlide = 0;
+            setInterval(() => {
+                slides[currentSlide].style.opacity = '0';
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].style.opacity = '1';
+            }, 10000);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            createBackgroundSlides();
+            rotateBackgrounds();
+
+            // Form submission handler
+            document.querySelector('.sell-form').addEventListener('submit', (e) => {
+                e.preventDefault();
+                alert('Listing feature coming soon!');
+            });
+        });
+
+        // Add page transition effect
+        document.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                if (this.getAttribute('href') !== '#') {
+                    e.preventDefault();
+                    document.body.style.opacity = '0';
+                    setTimeout(() => {
+                        window.location.href = this.getAttribute('href');
+                    }, 500);
+                }
+            });
+        });
+
+        // Fade in on page load
+        window.addEventListener('load', () => {
+            document.body.style.opacity = '1';
+        });
+    </script>
+</body>
+</html>

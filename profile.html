@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - ECO-JEEVAN</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="auth.js" defer></script>
+</head>
+<body>
+    <div class="background-slideshow" id="backgroundSlideshow"></div>
+    <nav class="navbar">
+        <div class="logo">
+            <h1><U>ECO-JEEVAN</U></h1>
+        </div>
+        <div  class="nav-links">
+            <a href="index.html"><u>Home</u></a>
+            <a href="browse.html"><u>About</u></a>
+            <a href="donation.html"><u>Donation</u> </a>
+            <!--<a href="selling.html">Selling  </a>-->
+            <a href="ewaste.html"><u>E-waste</u> </a>
+            <a href="Refurbished.html"><u>Refurbished</u></a>
+            <a href="profile.html" id="profileLink"><u>Profile</u></a>
+            <a href="login.html" id="logoutLink"><U>Logout</U>></a>
+    </nav>
+
+    <main class="main-content">
+        <div class="profile-container">
+            <div class="profile-header">
+                <div class="profile-avatar">
+                    <span></span>
+                </div>
+                <h2 class="profile-name">Aayam jain</h2>
+                <p class="profile-status">Eco Enthusiast</p>
+            </div>
+
+            <div class="profile-stats">
+                <div class="stat-card">
+                    <h3>Donations</h3>
+                    <p>5</p>
+                </div>
+                <div class="stat-card">
+                    <h3>items Bought </h3>
+                    <p>12</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Bought Refurbished items</h3>
+                    <p>8</p>
+                </div>
+            </div>
+
+            <div class="profile-details">
+                <h3 class="section-title">Account Details</h3>
+                <form class="profile-form">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" value="sam.senku.928@gmail.com" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" value="Aayam ">
+                    </div>
+                    <div class="form-group">
+                        <label for="bio">Bio</label>
+                        <textarea id="bio" placeholder="Tell us about yourself...">Passionate about sustainable living and eco-friendly technology.</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="location">Location</label>
+                        <input type="text" id="location" value="SBI colony , ahinsa chowk , jabalpur , madhya praadesh , India ">
+                    </div>
+                    <button type="submit" class="bid-btn">Save Changes</button>
+                </form>
+            </div>
+            
+        <div class="category-card">
+            <h1> Audit</h1>
+                <h2> Donation</h2>
+                <ul>
+                    laptop , 23/4/25 
+                    <br> 
+                    monitor ,24/8/25
+                </ul>
+                <br>
+                <h2> E-waste</h2>
+                <ul>
+                    Refrigerator , 23/4/25 
+                    <br> 
+                    Washing machine,24/8/25
+                </ul>
+                <br>
+                <h2>Refurbished</h2>
+                <ul>
+                    Mouse,24/8/25
+                </ul>
+        
+        </div>
+    </main>
+
+    <script>
+        // Background slideshow functionality
+        const backgrounds = [
+            'url("https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80") center/cover',
+            'url("https://images.unsplash.com/photo-1473973266408-ed4e27abdd47?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80") center/cover',
+            'url("https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80") center/cover'
+        ];
+
+        function createBackgroundSlides() {
+            const container = document.getElementById('backgroundSlideshow');
+            backgrounds.forEach((bg, index) => {
+                const slide = document.createElement('div');
+                slide.className = 'background-slide';
+                slide.style.background = bg;
+                slide.style.opacity = index === 0 ? '1' : '0';
+                container.appendChild(slide);
+            });
+        }
+
+        function rotateBackgrounds() {
+            const slides = document.querySelectorAll('.background-slide');
+            let currentSlide = 0;
+            setInterval(() => {
+                slides[currentSlide].style.opacity = '0';
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].style.opacity = '1';
+            }, 10000);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            createBackgroundSlides();
+            rotateBackgrounds();
+
+            // Form submission handler
+            document.querySelector('.profile-form').addEventListener('submit', (e) => {
+                e.preventDefault();
+                alert('Profile updated successfully!');
+            });
+        });
+
+        // Add page transition effect
+        document.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                if (this.getAttribute('href') !== '#') {
+                    e.preventDefault();
+                    document.body.style.opacity = '0';
+                    setTimeout(() => {
+                        window.location.href = this.getAttribute('href');
+                    }, 500);
+                }
+            });
+        });
+
+        // Fade in on page load
+        window.addEventListener('load', () => {
+            document.body.style.opacity = '1';
+        });
+    </script>
+</body>
+</html>

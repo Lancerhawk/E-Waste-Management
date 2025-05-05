@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><U>ECO-JEEVAN</U> </title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="auth.js" defer></script>
+</head>
+<body>
+    <div class="background-slideshow" id="backgroundSlideshow"></div>
+    <nav class="navbar">
+        <div class="logo">
+            <h1><U>ECO-JEEVAN</U></h1>
+        </div>
+        <div class="nav-links">
+           
+            <a href="index.html"><u>Home</u></a>
+            <a href="browse.html"><u>About</u></a>
+            <a href="donation.html"><u>Donation</u> </a>
+            <!--<a href="selling.html">Selling  </a>-->
+            <a href="ewaste.html"><u>E-waste</u> </a>
+            <a href="Refurbished.html"><u>Refurbished</u></a>
+            <a href="profile.html" id="profileLink"><u>Profile</u></a>
+            <!--<a href="login.html" id="logoutLink">Logout</a>-->
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <h2 class="section-title">Old - New Prodcut</h2>
+        
+        <div class="auction-tabs">
+            <button class="tab-btn active" data-tab="Latest product">latest product</button>
+            <button class="tab-btn" data-tab="10% Off">10% Off </button>
+            <button class="tab-btn" data-tab="20% Off">20% Off</button>
+            <button class="tab-btn" data-tab="35% Off">35% Off</button>
+            <button class="tab-btn" data-tab="45% Off ">45% Off</button>
+            <button class="tab-btn" data-tab="  50% Off">50% Off</button>
+            <button class="tab-btn" data-tab=" 60% Off ">60% Off</button>
+            <button class="tab-btn" data-tab=" 70 %Off ">70% Off</button>
+        </div>
+
+        <div class="tab-content active" id="active-auctions">
+            <div class="items-grid">
+                <div class="item-card">
+                    <div class="item-image">
+                        <img src="assests/RGB KEY.jpg" />
+                    </div>
+                    <div class="item-details">
+                        <h3 class="item-title">Keyboard RGB</h3>
+                        <p class="item-price">Rs350.00</p>
+                        <p class="item-time">Ends in 2 days</p>
+                        <button class="details-btn">View Details</button>
+                        <button class="bid-btn">Order now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+<br>
+
+        <div class="tab-content active" id="Mouse RGB">
+            <div class="items-grid">
+                <div class="item-card">
+                    <div class="item-image">
+                        <img src="assests/rgbmouse.jpg" />
+                    </div>
+                    <div class="item-details">
+                        <h3 class="item-title">Mouse RGB</h3>
+                        <p class="item-price">Rs1500.00</p>
+                        <p class="item-time">Ends in 2 days</p>
+                        <button class="details-btn">View Details</button>
+                        <button class="bid-btn">Order now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <br>
+        <div class="tab-content active" id="Cooling pad ">
+            <div class="items-grid">
+                <div class="item-card">
+                    <div class="item-image">
+                        <img src="assests/pad.jpg" />
+                    </div>
+                    <div class="item-details">
+                        <h3 class="item-title">Cooling Pad</h3>
+                        <p class="item-price">Rs700.00</p>
+                        <p class="item-time">Ends in 2 days</p>
+                        <button class="details-btn">View Details</button>
+                        <button class="bid-btn">Order Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+    </main>
+
+    <script>
+        // Background slideshow functionality
+        const backgrounds = [
+            'url("https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80") center/cover',
+            'url("https://images.unsplash.com/photo-1473973266408-ed4e27abdd47?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80") center/cover',
+            'url("https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80") center/cover'
+        ];
+
+        function createBackgroundSlides() {
+            const container = document.getElementById('backgroundSlideshow');
+            backgrounds.forEach((bg, index) => {
+                const slide = document.createElement('div');
+                slide.className = 'background-slide';
+                slide.style.background = bg;
+                slide.style.opacity = index === 0 ? '1' : '0';
+                container.appendChild(slide);
+            });
+        }
+
+        function rotateBackgrounds() {
+            const slides = document.querySelectorAll('.background-slide');
+            let currentSlide = 0;
+            setInterval(() => {
+                slides[currentSlide].style.opacity = '0';
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].style.opacity = '1';
+            }, 10000);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            createBackgroundSlides();
+            rotateBackgrounds();
+
+            // Tab switching functionality
+            const tabs = document.querySelectorAll('.tab-btn');
+            const contents = document.querySelectorAll('.tab-content');
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    // Remove active class from all tabs and contents
+                    tabs.forEach(t => t.classList.remove('active'));
+                    contents.forEach(c => c.classList.remove('active'));
+
+                    // Add active class to clicked tab and corresponding content
+                    tab.classList.add('active');
+                    document.getElementById(`${tab.dataset.tab}-auctions`).classList.add('active');
+                });
+            });
+        });
+
+        // Add page transition effect
+        document.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                if (this.getAttribute('href') !== '#') {
+                    e.preventDefault();
+                    document.body.style.opacity = '0';
+                    setTimeout(() => {
+                        window.location.href = this.getAttribute('href');
+                    }, 500);
+                }
+            });
+        });
+
+        // Fade in on page load
+        window.addEventListener('load', () => {
+            document.body.style.opacity = '1';
+        });
+    </script>
+</body>
+</html>
